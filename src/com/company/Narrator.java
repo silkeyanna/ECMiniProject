@@ -13,21 +13,11 @@ public class Narrator {
         name = in.nextLine(); //assigns entered string to the name variable
 
         //finally we print a greeting in the format of Hello {name}
-        System.out.println("Hello " + name + ". Welcome to your new adventure game! \n You are lost in a labyrint, at the point of the x");
-        System.out.println("X─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
-                "├─────┬─╴ ├───╴ ╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
-                "│ ╶───┤ ┌─┘ ╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
-                "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
-                "├─┐ │ │ │ │ ┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
-                "│ ╵ │ │ │ │ │ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
-                "├───┘ │ ├─┘ ├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
-                "│ ┌───┤ ╵ ┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
-                "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘ │ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
-                "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤ ┌─────┬─┘ ├───┐ ┌───┼───╴ │ │ │ \n" +
-                "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │ ╵ ┌─╴ │ ╷ ╵ ╷ │ ╵ ╷ │ ┌───┘ ╵ │ \n" +
-                "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
-                "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ │ \n" +
-                "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        System.out.println("Hello " + name + ". Welcome to your new adventure game! \n At the point of being you are lost in a labyrinth and trying to find your way out. You are represented by the X");
+
+        //create labyrinth at start of the story
+        Location[] Labyrinth = Location.createWorld();
+        System.out.println(Labyrinth[0].getDescription());
         System.out.println("Press 'A' if you want to go down, press 'B' if you want to go to the right.");
         String input = in.nextLine();
         if(input == "Down"){

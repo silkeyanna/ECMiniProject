@@ -17,13 +17,13 @@ public class Location {
     /**
      * Constructs a high school with an emergency exit and a desk chair.
      */
-    public Location(){
+    public Location() {
     }
 
     /**
      * Constructs a location with a given description, exit and chair.
      */
-    public Location(String description, String[] objects, String[] exit, String choice){
+    public Location(String description, String[] objects, String[] exit, String choice) {
         this.description = description;
         this.exits = exit;
         this.objects = objects;
@@ -33,11 +33,11 @@ public class Location {
     /**
      * Displays the description of the location.
      */
-    public static void printLocation(Location location){
+    public static void printLocation(Location location) {
         System.out.println("Description: " + location.description + ".\n Objects: " + Arrays.toString(location.objects) + ".\n Exits: " + Arrays.toString(location.exits));
     }
 
-    public static Location testLocation(){
+    public static Location testLocation() {
         Location location = new Location();
         printLocation(location);
         return location;
@@ -47,63 +47,69 @@ public class Location {
     /**
      * Gets the location's description.
      */
-    public String getDescription() {return this.description;}
+    public String getDescription() {
+        return this.description;
+    }
 
-    public String[] getObjects(){ return this.objects;}
+    public String[] getObjects() {
+        return this.objects;
+    }
 
     /**
      * Gets the location's exit.
      */
-    public String[] getExits(){return this.exits;}
+    public String[] getExits() {
+        return this.exits;
+    }
 
     /**
      * Sets the description.
      */
-    public void setDescription(String description){this.description = description;}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public void setObjects(String[] objects){this.objects = objects;}
+    public void setObjects(String[] objects) {
+        this.objects = objects;
+    }
 
     /**
      * Sets the exit.
      */
-    public void setExits(String[] exit){this.exits = exit;}
-
-    public Location addChoice(String choice, Location location){
-
+    public void setExits(String[] exit) {
+        this.exits = exit;
     }
 
-    public Location selectNextLocation(String choice, Location previousLocation){
-
-    }
 
 
     /**
      * Creates a world that contains different locations
+     *
      * @return Location[] world
      */
-    public static Location[] createWorld(){
+    public static Location[] createWorld() {
         //create an array of Locations
         Location[] world = new Location[10];
         Location location1 = new Location();
         location1.setDescription(
                 "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
-                "├─────┬─╴ ├───╴ ╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
-                "│ ╶───┤ ┌─┘X╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
-                "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
-                "├─┐ │ │ │ │ ┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
-                "│ ╵ │ │ │ │ │ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
-                "├───┘ │ ├─┘ ├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
-                "│ ┌───┤ ╵ ┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
-                "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘ │ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
-                "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤ ┌─────┬─┘ ├───┐ ┌───┼───╴ │ │ │ \n" +
-                "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │ ╵ ┌─╴ │ ╷ ╵ ╷ │ ╵ ╷ │ ┌───┘ ╵ │ \n" +
-                "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
-                "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
-                "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+                        "├─────┬─╴ ├───╴ ╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
+                        "│ ╶───┤ ┌─┘X╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
+                        "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
+                        "├─┐ │ │ │ │ ┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
+                        "│ ╵ │ │ │ │ │ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
+                        "├───┘ │ ├─┘ ├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
+                        "│ ┌───┤ ╵ ┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘ │ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤ ┌─────┬─┘ ├───┐ ┌───┼───╴ │ │ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │ ╵ ┌─╴ │ ╷ ╵ ╷ │ ╵ ╷ │ ┌───┘ ╵ │ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
         location1.setExits(new String[]{"Up", "Down"});
         Location location2 = new Location();
         location2.setDescription(
-                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
                         "├─────┬─╴ ├───╴X╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
                         "│ ╶───┤ ┌─┘ ╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
                         "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
@@ -117,17 +123,12 @@ public class Location {
                         "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
                         "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
                         "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location2.setExits(new String[]{"Left", "Right"});
+        world[0] = location1;
+        world[1] = location2;
         return world;
     }
-
-
-    public static void main(String[] args) {
-        testLocation();
-        Location location1 = new Location();
-        location1.setDescription("start of labyrinth");
-        location1.setExits(new String[]{"Up", "Down"});
-        }
-    }
+}
 
 /**
                "┌─────────┬D──────┬─────────────┬─────┬─────┬───────────┐ \n" +
