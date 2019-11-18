@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * A location class with information about a location (description, exits, objects, etc.).
@@ -55,11 +56,19 @@ public class Location {
         return this.objects;
     }
 
+    public String getChoice(){
+        return this.choice;
+    }
+
     /**
      * Gets the location's exit.
      */
     public String[] getExits() {
         return this.exits;
+    }
+
+    public String setChoice(){
+        return this.choice;
     }
 
     /**
@@ -80,6 +89,14 @@ public class Location {
         this.exits = exit;
     }
 
+    public String setChoice(String choice){
+        return this.choice = choice;
+    }
+
+    public Location getNextLocation(Scanner in){
+
+    }
+
 
 
     /**
@@ -92,7 +109,7 @@ public class Location {
         Location[] world = new Location[10];
         Location location1 = new Location();
         location1.setDescription(
-                "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
                         "├─────┬─╴ ├───╴ ╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
                         "│ ╶───┤ ┌─┘X╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
                         "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
@@ -109,7 +126,7 @@ public class Location {
         location1.setExits(new String[]{"Up", "Down"});
         Location location2 = new Location();
         location2.setDescription(
-                "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
                         "├─────┬─╴ ├───╴X╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
                         "│ ╶───┤ ┌─┘ ╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
                         "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
@@ -123,7 +140,9 @@ public class Location {
                         "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
                         "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
                         "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location2.setChoice("Up");
         location2.setExits(new String[]{"Left", "Right"});
+
         world[0] = location1;
         world[1] = location2;
         return world;

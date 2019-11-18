@@ -15,16 +15,15 @@ public class Narrator {
         //finally we print a greeting in the format of Hello {name}
         System.out.println("Hello " + name + ". Welcome to your new adventure game! \n At the point of being you are lost in a labyrinth and trying to find your way out. You are represented by the X");
 
+
         //create labyrinth at start of the story
         Location[] Labyrinth = Location.createWorld();
-        System.out.println(Labyrinth[0].getDescription());
+        Location L = Labyrinth[0];
+        //while player is not dead
+        System.out.println(L.getDescription());
         System.out.println("Press 'A' if you want to go down, press 'B' if you want to go to the right.");
         String input = in.nextLine();
-        if(input == "Down"){
-            System.out.println("You accidentally bumped into a rhinosaurus who hasn't eaten for a while. You die.");
-            return;
-        } else if(input == "Up"){
-
+        L = L.getChoice(in);
         }
 
     }
