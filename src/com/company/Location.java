@@ -12,8 +12,10 @@ public class Location {
     //instance variables are private; can be accessed from inside class but not from other classes
     private String description;
     private String[] objects;
-    private String[] exits;
+    private Location[] exits;
     private String choice;
+    private String statement;
+    private boolean dead;
 
     /**
      * Constructs a high school with an emergency exit and a desk chair.
@@ -24,11 +26,12 @@ public class Location {
     /**
      * Constructs a location with a given description, exit and chair.
      */
-    public Location(String description, String[] objects, String[] exit, String choice) {
+    public Location(String description, String[] objects, Location[] exits, String choice,String statement) {
         this.description = description;
-        this.exits = exit;
+        this.exits = exits;
         this.objects = objects;
         this.choice = choice;
+        this.statement=statement;
     }
 
     /**
@@ -51,19 +54,38 @@ public class Location {
     public String getDescription() {
         return this.description;
     }
+    public boolean getDead() {
+        return this.dead;
+    }
+
+    public void setDead(Boolean dead){
+        this.dead=dead;
+    }
+    public String getStatement() {
+        return this.statement;
+    }
 
     public String[] getObjects() {
         return this.objects;
     }
 
-    public String getChoice(){
-        return this.choice;
+    public Location getChoice(Location location,String choice){
+
+       Location []l= location.getExits();
+       if(choice!="A"&&choice!="B"){
+           return null;
+       }
+       if(choice.equals("A")){
+          return l[0];
+       }else{
+           return l[1];
+       }
     }
 
     /**
      * Gets the location's exit.
      */
-    public String[] getExits() {
+    public Location[] getExits() {
         return this.exits;
     }
 
@@ -77,6 +99,9 @@ public class Location {
     public void setDescription(String description) {
         this.description = description;
     }
+    public void setStatement(String statement) {
+        this.statement = statement;
+    }
 
     public void setObjects(String[] objects) {
         this.objects = objects;
@@ -85,15 +110,16 @@ public class Location {
     /**
      * Sets the exit.
      */
-    public void setExits(String[] exit) {
-        this.exits = exit;
+    public void setExits(Location[] exits) {
+        this.exits = exits;
     }
 
     public String setChoice(String choice){
         return this.choice = choice;
+
     }
 
-    public Location getNextLocation(Scanner in){
+    public void getNextLocation(Scanner in){
 
     }
 
@@ -108,6 +134,8 @@ public class Location {
         //create an array of Locations
         Location[] world = new Location[10];
         Location location1 = new Location();
+        location1.setStatement("Press 'A' if you want to go down, press 'B' if you want to go to the right.");
+
         location1.setDescription(
                         "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
                         "├─────┬─╴ ├───╴ ╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
@@ -123,8 +151,10 @@ public class Location {
                         "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
                         "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
                         "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
-        location1.setExits(new String[]{"Up", "Down"});
         Location location2 = new Location();
+        Location die1 = new Location();
+        location1.setExits(new Location[]{location2, die1});
+
         location2.setDescription(
                         "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
                         "├─────┬─╴ ├───╴X╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
@@ -141,7 +171,9 @@ public class Location {
                         "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
                         "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
         location2.setChoice("Up");
-        location2.setExits(new String[]{"Left", "Right"});
+        Location location3 = new Location();
+        Location die2 = new Location();
+        location2.setExits(new Location[]{location3, die2});
 
         world[0] = location1;
         world[1] = location2;
