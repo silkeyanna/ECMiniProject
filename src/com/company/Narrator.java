@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Narrator {
     //first we create a string variable name and a new Scanner in
     public static String name;
-    public static boolean dead=false;
+
     public static Scanner in = new Scanner(System.in);
 
-    public static void createNarrator() {
+    public static int createNarrator() {
 
         //here we ask the user to enter their name and store it in the variable created earlier
         System.out.print("Please enter your name: ");
@@ -19,18 +19,36 @@ public class Narrator {
 
 
         //create labyrinth at start of the story
-        Location[] Labyrinth = Location.createWorld();
-        Location L = Labyrinth[0];
+        Location L = Location.createWorld();
+
         //while player is not dead
-        while (dead==false) {
+        boolean Final=false;
+        Boolean dead=false;
+        while (dead == false && Final == false) {
             System.out.println(L.getDescription());
             System.out.println(L.getStatement());
-            String input = in.nextLine();
-            dead=L.getDead();
-            L = L.getChoice(L, input);
+            dead = L.getDead();
+            Final = L.getFinal();
 
+            if (dead) {
+                return 0;
+            }
+            if(Final) {
+                return 0;
+            }
+
+                String input = in.nextLine();
+
+                L = L.getChoice(L, input);
+                if (L == null) {
+                    return -1;
+
+
+            }
         }
+            return 0;
         }
 
     }
+
 

@@ -16,6 +16,7 @@ public class Location {
     private String choice;
     private String statement;
     private boolean dead;
+    private boolean Final;
 
     /**
      * Constructs a high school with an emergency exit and a desk chair.
@@ -61,6 +62,13 @@ public class Location {
     public void setDead(Boolean dead){
         this.dead=dead;
     }
+    public boolean getFinal() {
+        return this.Final;
+    }
+
+    public void setFinal(Boolean Final){
+        this.Final=Final;
+    }
     public String getStatement() {
         return this.statement;
     }
@@ -72,10 +80,11 @@ public class Location {
     public Location getChoice(Location location,String choice){
 
        Location []l= location.getExits();
-       if(choice!="A"&&choice!="B"){
+       if(!choice.equals("A")&&!choice.equals("B")){
            return null;
        }
        if(choice.equals("A")){
+
           return l[0];
        }else{
            return l[1];
@@ -130,58 +139,378 @@ public class Location {
      *
      * @return Location[] world
      */
-    public static Location[] createWorld() {
+    public static Location createWorld() {
         //create an array of Locations
         Location[] world = new Location[10];
         Location location1 = new Location();
-        location1.setStatement("Press 'A' if you want to go down, press 'B' if you want to go to the right.");
+        Location location2 = new Location();
+        Location location3 = new Location();
+        Location location4 = new Location();
+        Location location5 = new Location();
+        Location location6 = new Location();
+        Location location7 = new Location();
+        Location location8 = new Location();
+        Location location9 = new Location();
+        Location location10 = new Location(); //to do
+        Location location11= new Location(); //to do
+        Location location12= new Location(); //to do
 
+        Location die1 = new Location();
+        Location die2 = new Location();
+        Location die3 = new Location();
+        Location die4 = new Location();
+        Location die5 = new Location();
+        Location die6 = new Location();
+        Location die7 = new Location();
+        Location die8 = new Location();
+        Location die9 = new Location(); //to do
+        Location die10 = new Location(); //to do
+        Location die11= new Location(); //to do
+
+        Location final1=new Location();
+        Location final2=new Location(); //to do
+
+
+        location1.setStatement("Press 'A' if you want to go down, press 'B' if you want to go to the right.");
         location1.setDescription(
                         "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
-                        "├─────┬─╴ ├───╴ ╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
-                        "│ ╶───┤ ┌─┘X╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
-                        "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
-                        "├─┐ │ │ │ │ ┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
-                        "│ ╵ │ │ │ │ │ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
-                        "├───┘ │ ├─┘ ├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
-                        "│ ┌───┤ ╵ ┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
+                        "├─────┬─╴x├───╴ ╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
+                        "│ ╶───┤x┌─┘X╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
                         "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘ │ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
                         "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤ ┌─────┬─┘ ├───┐ ┌───┼───╴ │ │ │ \n" +
                         "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │ ╵ ┌─╴ │ ╷ ╵ ╷ │ ╵ ╷ │ ┌───┘ ╵ │ \n" +
                         "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
                         "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
                         "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
-        Location location2 = new Location();
-        Location die1 = new Location();
-        location1.setExits(new Location[]{location2, die1});
+        location1.setExits(new Location[]{die1, location2});
+        location1.setDead(false);
+        location1.setFinal(false);
 
+        die1.setDescription(" \\||/\n" +
+                "                |  @___oo\n" +
+                "      /\\  /\\   / (__,,,,|\n" +
+                "     ) /^\\) ^\\/ _)\n" +
+                "     )   /^\\/   _)\n" +
+                "     )   _ /  / _)\n" +
+                " /\\  )/\\/ ||  | )_)\n" +
+                "<  >      |(,,) )__)\n" +
+                " ||      /    \\)___)\\\n" +
+                " | \\____(      )___) )___\n" +
+                "  \\______(_______;;; __;;;");
+        die1.setStatement("You have found a horrible dragon that throws fire. You are dead");
+        die1.setDead(true);
+        die1.setFinal(false);
+
+
+        location2.setStatement("Press 'A' if you want to go left, press 'B' if you want to go to the right.");
         location2.setDescription(
-                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
-                        "├─────┬─╴ ├───╴X╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
-                        "│ ╶───┤ ┌─┘ ╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
-                        "│ ╶─┐ │ │ ┌───╴ │ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
-                        "├─┐ │ │ │ │ ┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
-                        "│ ╵ │ │ │ │ │ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
-                        "├───┘ │ ├─┘ ├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
-                        "│ ┌───┤ ╵ ┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
+                "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴X╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷ ╷ │ ┌─────┐ ╷ │ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │ │ ├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │ └─┘ ╷ ╵ ┌─┴─╴ │ └─────┤ │ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
                         "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘ │ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
                         "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤ ┌─────┬─┘ ├───┐ ┌───┼───╴ │ │ │ \n" +
                         "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │ ╵ ┌─╴ │ ╷ ╵ ╷ │ ╵ ╷ │ ┌───┘ ╵ │ \n" +
                         "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
                         "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
                         "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
-        location2.setChoice("Up");
-        Location location3 = new Location();
-        Location die2 = new Location();
-        location2.setExits(new Location[]{location3, die2});
+        location2.setExits(new Location[]{die2, location3});
+        location2.setDead(false);
+        location2.setFinal(false);
 
-        world[0] = location1;
-        world[1] = location2;
-        return world;
+        die2.setDescription(" ) _     _\n" +
+                "    ( (^)-~-(^)\n" +
+                "__,-.\\_( 6 6 )__,-.___\n" +
+                "  'M'   \\   /   'M'\n" +
+                "         >o<");
+        die2.setStatement("You have been attacked by hungry rats. You are dead");
+        die2.setDead(true);
+        die2.setFinal(false);
+
+        location3.setStatement("Press 'A' if you want to go left, press 'B' if you want to go to the right.");
+        location3.setDescription(
+                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴x╷x╵x┌───┬─────┐x│ ╷ ╶─┘ ╷X╷ │ ┌─────┐ ╷ │ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │x│ ├───┬─┘x│ └─┤ ┌─╴ ╵ │ │ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │x└─┘x╷x╵x┌─┴─╴ │ └─────┤ │ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤ ┌───┴─────╴ │ │ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘ │ ╶─┬───────┘ │ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │ ┌─────┬─┴─╴ │ ┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │ │ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘ │ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤ ┌─────┬─┘ ├───┐ ┌───┼───╴ │ │ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │ ╵ ┌─╴ │ ╷ ╵ ╷ │ ╵ ╷ │ ┌───┘ ╵ │ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤ ┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵ ╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location3.setExits(new Location[]{die3, location4});
+        location3.setDead(false);
+        location3.setFinal(false);
+
+        die3.setDescription("_;~)                  (~;_\n" +
+                "(   |                  |   )\n" +
+                " ~', ',    ,''~'',   ,' ,'~\n" +
+                "     ', ','       ',' ,'\n" +
+                "       ',: {'} {'} :,'\n" +
+                "         ;   /^\\   ;\n" +
+                "          ~\\  ~  /~\n" +
+                "        ,' ,~~~~~, ',\n" +
+                "      ,' ,' ;~~~; ', ',\n" +
+                "    ,' ,'    '''    ', ',\n" +
+                "  (~  ;               ;  ~)\n" +
+                "   -;_)               (_;");
+        die3.setStatement("There was a hole in the ground! You have fallen to more than 300 meters high.You are dead");
+        die3.setDead(true);
+        die3.setFinal(false);
+
+        location4.setStatement("Press 'A' if you want to go left, press 'B' if you want to go to the right.");
+        location4.setDescription(
+                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴x╷x╵x┌───┬─────┐x│ ╷ ╶─┘ ╷x╷x│ ┌─────┐ ╷ │ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │x│ ├───┬─┘x│x└─┤ ┌─╴ ╵ │ │ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │x└─┘x╷x╵x┌─┴─╴x│ └─────┤ │ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤x┌───┴─────╴ │ │ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘x│ ╶─┬───────┘ │ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │x┌─────┬─┴─╴ │ ┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │x│ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘x│ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤x┌─────┬─┘ ├───┐ ┌───┼───╴ │ │ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │x╵x┌─╴x│ ╷ ╵ ╷ │ ╵ ╷ │ ┌───┘ ╵ │ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤x┌─┴─┴───┘ ├───┤ │ └─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵X╵ ┌───────┘ ╶─┘ └─────╴ │ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location4.setExits(new Location[]{location10, location5});
+        location4.setDead(false);
+        location4.setFinal(false);
+
+        location5.setStatement("Press 'A' if you want to go left, press 'B' if you want to go up.");
+        location5.setDescription(
+                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴x╷x╵x┌───┬─────┐x│ ╷ ╶─┘ ╷x╷x│ ┌─────┐ ╷ │ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │x│ ├───┬─┘x│x└─┤ ┌─╴ ╵ │ │ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │x└─┘x╷x╵x┌─┴─╴x│ └─────┤ │ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤x┌───┴─────╴ │ │ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘x│ ╶─┬───────┘ │ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │x┌─────┬─┴─╴ │ ┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │x│ ┌─┐ ╵ ┌─┬─┘ ├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘x│ │ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤x┌─────┬─┘X├───┐ ┌───┼───╴ │ │ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │x╵x┌─╴x│ ╷x╵x╷x│ ╵ ╷ │ ┌───┘ ╵ │ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤x┌─┴─┴───┘x├───┤ │ └─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵x╵x┌───────┘ ╶─┘ └─────╴ │ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location5.setExits(new Location[]{die4, location6});
+        location5.setDead(false);
+        location5.setFinal(false);
+
+        die4.setDescription("...\n" +
+                "             ;::::;\n" +
+                "           ;::::; :;\n" +
+                "         ;:::::'   :;\n" +
+                "        ;:::::;     ;.\n" +
+                "       ,:::::'       ;           OOO\\\n" +
+                "       ::::::;       ;          OOOOO\\\n" +
+                "       ;:::::;       ;         OOOOOOOO\n" +
+                "      ,;::::::;     ;'         / OOOOOOO\n" +
+                "    ;:::::::::`. ,,,;.        /  / DOOOOOO\n" +
+                "  .';:::::::::::::::::;,     /  /     DOOOO\n" +
+                " ,::::::;::::::;;;;::::;,   /  /        DOOO\n" +
+                ";`::::::`'::::::;;;::::: ,#/  /          DOOO\n" +
+                ":`:::::::`;::::::;;::: ;::#  /            DOOO\n" +
+                "::`:::::::`;:::::::: ;::::# /              DOO\n" +
+                "`:`:::::::`;:::::: ;::::::#/               DOO\n" +
+                " :::`:::::::`;; ;:::::::::##                OO\n" +
+                " ::::`:::::::`;::::::::;:::#                OO\n" +
+                " `:::::`::::::::::::;'`:;::#                O\n" +
+                "  `:::::`::::::::;' /  / `:#\n" +
+                "   ::::::`:::::;'  /  /   `#");
+        die4.setStatement("You have met the grim reaper.You are dead");
+        die4.setDead(true);
+        die4.setFinal(false);
+
+        location6.setStatement("Press 'A' if you want to go left, press 'B' if you want to go to the right.");
+        location6.setDescription(
+                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴x╷x╵x┌───┬─────┐x│ ╷ ╶─┘ ╷x╷x│ ┌─────┐X╷ │ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │x│ ├───┬─┘x│x└─┤x┌─╴x╵x│ │ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │x└─┘x╷x╵x┌─┴─╴x│x└─────┤ │ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤x┌───┴─────╴x│ │ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘x│x╶─┬───────┘ │ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │x┌─────┬─┴─╴x│ ┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │x│x┌─┐x╵x┌─┬─┘ ├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘x│x│ └───┘ ╵ ┌─┘ ╶─┐ │ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤x┌─────┬─┘x├───┐ ┌───┼───╴ │ │ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │x╵x┌─╴x│ ╷x╵x╷x│ ╵ ╷ │ ┌───┘ ╵ │ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤x┌─┴─┴───┘x├───┤ │ └─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵x╵x┌───────┘ ╶─┘ └─────╴ │ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location6.setExits(new Location[]{die5, location7});
+        location6.setDead(false);
+        location6.setFinal(false);
+
+        die5.setDescription("|___|___|___|___|___|___|___|___|___|___|___|___|\n" +
+                            "|_|___|___|___|___|___|___|___|___|___|___|___|_|\n" +
+                            "|___|___|___|___|___|___|___|___|___|___|___|___|\n" +
+                            "|_|___|___|___|___|___|___|___|___|___|___|___|_|\n" +
+                            "|___|___|___|___|___|___|___|___|___|___|___|___|\n" +
+                            "|___|___|___|___|___|___|___|___|___|___|___|___|\n" +
+                            "|___|___|___|___|___|___|___|___|___|___|___|___|");
+        die5.setStatement("A wall has closed behind you. You have been locked up. You starve");
+        die5.setDead(true);
+        die5.setFinal(false);
+
+        location7.setStatement("Press 'A' if you want to go left, press 'B' if you want to go down.");
+        location7.setDescription(
+                        "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴x╷x╵x┌───┬─────┐x│ ╷ ╶─┘ ╷x╷x│ ┌─────┐x╷x│ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │x│ ├───┬─┘x│x└─┤x┌─╴x╵x│x│ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │x└─┘x╷x╵x┌─┴─╴x│x└─────┤x│ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤x┌───┴─────╴x│x│ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘x│x╶─┬───────┘x│ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │x┌─────┬─┴─╴x│x┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │x│x┌─┐x╵x┌─┬─┘x├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘x│x│ └───┘ ╵x┌─┘ ╶─┐ │ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤x┌─────┬─┘x├───┐X┌───┼───╴ │ │ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │x╵x┌─╴x│ ╷x╵x╷x│ ╵ ╷ │ ┌───┘ ╵ │ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤x┌─┴─┴───┘x├───┤ │ └─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵x╵x┌───────┘ ╶─┘ └─────╴ │ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location7.setExits(new Location[]{die6, location8});
+        location7.setDead(false);
+        location7.setFinal(false);
+
+        die6.setDescription("/^\\      /^\\\n" +
+                "      |  \\    /  |\n" +
+                "      ||\\ \\../ /||\n" +
+                "      )'        `(\n" +
+                "     ,;`w,    ,w';,\n" +
+                "     ;,  ) __ (  ,;\n" +
+                "      ;  \\(\\/)/  ;;\n" +
+                "     ;|  |vwwv|    ``-...\n" +
+                "      ;  `lwwl'   ;      ```''-.\n" +
+                "     ;| ; `\"\"' ; ;              `.\n" +
+                "      ;         ,   ,          , |\n" +
+                "      '  ;      ;   l    .     | |\n" +
+                "      ;    ,  ,    |,-,._|      \\;\n" +
+                "       ;  ; `' ;   '    \\ `\\     \\;\n" +
+                "       |  |    |  |     |   |    |;\n" +
+                "       |  ;    ;  |      \\   \\   (;\n" +
+                "       | |      | l       | | \\  |\n" +
+                "       | |      | |  pb   | |  ) |\n" +
+                "       | |      | ;       | |  | |\n" +
+                "       ; ,      : ,      ,_.'  | |\n" +
+                "      :__'      | |           ,_.'\n" +
+                "               `--'");
+        die6.setStatement("You have met a hungry wolf. And it has devoured you. You are dead");
+        die6.setDead(true);
+        die6.setFinal(false);
+
+        location8.setStatement("Press 'A' if you want to go left, press 'B' if you want to go to right.");
+        location8.setDescription(
+                "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴x╷x╵x┌───┬─────┐x│ ╷ ╶─┘ ╷x╷x│ ┌─────┐x╷x│ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │x│ ├───┬─┘x│x└─┤x┌─╴x╵x│x│ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │x└─┘x╷x╵x┌─┴─╴x│x└─────┤x│ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤x┌───┴─────╴x│x│ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘x│x╶─┬───────┘x│ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │x┌─────┬─┴─╴x│x┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │x│x┌─┐x╵x┌─┬─┘x├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘x│x│ └───┘ ╵x┌─┘ ╶─┐ │ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤x┌─────┬─┘x├───┐x┌───┼───╴ │ │ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │x╵x┌─╴x│ ╷x╵x╷x│x╵x╷x│ ┌───┘ ╵ │ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤x┌─┴─┴───┘x├───┤x│ └─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵x╵x┌───────┘ ╶─┘X└─────╴ │ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location8.setExits(new Location[]{die7, location9});
+        location8.setDead(false);
+        location8.setFinal(false);
+
+        die7.setDescription("__.......__\n" +
+                "            .-:::::::::::::-.\n" +
+                "          .:::''':::::::''':::.\n" +
+                "        .:::'     `:::'     `:::. \n" +
+                "   .'\\  ::'   ^^^  `:'  ^^^   '::  /`.\n" +
+                "  :   \\ ::   _.__       __._   :: /   ;\n" +
+                " :     \\`: .' ___\\     /___ `. :'/     ; \n" +
+                ":       /\\   (_|_)\\   /(_|_)   /\\       ;\n" +
+                ":      / .\\   __.' ) ( `.__   /. \\      ;\n" +
+                ":      \\ (        {   }        ) /      ; \n" +
+                " :      `-(     .  ^\"^  .     )-'      ;\n" +
+                "  `.       \\  .'<`-._.-'>'.  /       .'\n" +
+                "    `.      \\    \\;`.';/    /      .'\n" +
+                "      `._    `-._       _.-'    _.'\n" +
+                "       .'`-.__ .'`-._.-'`. __.-'`.\n" +
+                "     .'       `.         .'       `.\n" +
+                "   .'           `-.   .-'           `.");
+        die7.setStatement("You have found a vampire, who has bit your neck. You are dead");
+        die7.setDead(true);
+        die7.setFinal(false);
+
+        location9.setStatement("Press 'A' if you want to go up, press 'B' if you want to go down.");
+        location9.setDescription(
+                "┌─────────┬───────┬─────────────┬─────┬─────┬───────────┐ \n" +
+                        "├─────┬─╴x├───╴x╷x╵x┌───┬─────┐x│ ╷ ╶─┘ ╷x╷x│ ┌─────┐x╷x│ \n" +
+                        "│ ╶───┤x┌─┘x╶───┼───┘ ╷ └───╴ │x│ ├───┬─┘x│x└─┤x┌─╴x╵x│x│ \n" +
+                        "│ ╶─┐ │x│ ┌───╴x│ ╶───┼───┬─╴ │x└─┘x╷x╵x┌─┴─╴x│x└─────┤x│ \n" +
+                        "├─┐ │ │x│ │x┌───┘ ┌─╴ │ ╷ │ ╶─┼─────┴───┤x┌───┴─────╴x│x│ \n" +
+                        "│ ╵ │ │x│ │x│ ╶─┬─┘ ┌─┤ └─┴─╴ │ ┌───────┘x│x╶─┬───────┘x│ \n" +
+                        "├───┘ │x├─┘x├───┤ ┌─┘ │ ╶─┬───┘ │x┌─────┬─┴─╴x│x┌───────┤ \n" +
+                        "│ ┌───┤x╵x┌─┘ ╷ ╵ │ ╶─┴─╴ └─╴ ╷ │x│x┌─┐x╵x┌─┬─┘x├─────┐ │ \n" +
+                        "│ │ ╷ └───┤ ╶─┴───┴───┐ ┌─────┴─┘x│x│ └───┘ ╵x┌─┘x╶─┐x│ │ \n" +
+                        "│ ╵ ├─┐ ╶─┤ ┌───────┐ └─┤x┌─────┬─┘x├───┐x┌───┼───╴x│x│ │ \n" +
+                        "│ ╶─┤ ├─╴ │ └─┬─╴ ┌─┴─╴ │x╵x┌─╴x│ ╷x╵x╷x│x╵x╷x│x┌───┘x╵X│ \n" +
+                        "├─╴ │ │ ╷ ├─╴ │ ┌─┘ ┌───┴───┤x┌─┴─┴───┘x├───┤x│x└─────┐ │ \n" +
+                        "│ ╶─┘ │ └─┘ ╶─┘ │ ╶─┘ ╶───┐ ╵x╵x┌───────┘ ╶─┘x└─────╴x│ F \n" +
+                        "└─────┴─────────┴─────────┴─────┴─────────────────────┴─┘ ");
+        location9.setExits(new Location[]{die8, final1});
+        location9.setDead(false);
+        location9.setFinal(false);
+
+        die8.setDescription(" \\\n" +
+                " /                                 />\n" +
+                " \\__+_____________________/\\/\\___/ /|\n" +
+                " ()______________________      / /|/\\\n" +
+                "             /0 0  ---- |----    /---\\\n" +
+                "            |0 o 0 ----|| - \\ --|      \\\n" +
+                "             \\0_0/____/ |    |  |\\      \\\n" +
+                "                         \\__/__/  |      \\\n" +
+                "Bang! Bang!                       |       \\\n" +
+                "                                  |         \\\n" +
+                "                                  |__________|");
+        die8.setStatement("A gang of gangsters has appeared who shot you mercilessly.You are dead");
+        die8.setDead(true);
+        die8.setFinal(false);
+
+        final1.setDescription(" \\       /            _\\/_\n" +
+                "                     .-'-.              //o\\  _\\/_\n" +
+                "  _  ___  __  _ --_ /     \\ _--_ __  __ _ | __/o\\\\ _\n" +
+                "=-=-_=-=-_=-=_=-_= -=======- = =-=_=-=_,-'|\"'\"\"-|-,_ \n" +
+                " =- _=-=-_=- _=-= _--=====- _=-=_-_,-\"          |\n" +
+                "   =- =- =-= =- = -  -===- -= - .\"");
+        final1.setStatement("You have found the end of the maze and a dawn looms over you. You win");
+        final1.setDead(false);
+        final1.setFinal(true);
+
+
+
+
+
+
+
+        return location1;
     }
 }
 
-/**
+/*
                "┌─────────┬D──────┬─────────────┬─────┬─────┬───────────┐ \n" +
                "├─────┬─╴ ├─── 2╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷3╷ │D┌─────┐6╷ │ \n" +
                "│ ╶───┤ ┌─┘1 ───┼───┘ ╷ └───╴ │ │D├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
