@@ -13,7 +13,7 @@ until the user either dies or makes it out of the labyrinth.
 public class Main {
 
     public static void main(String[] args) {
-	    if(Narrator.createNarrator()==-1){
+	    if(Narrator.createNarrator()==-1){ //We call createNarrator, and if it's return -1 is an error
 	        throw new RuntimeException("Invalid input");
         }
     }

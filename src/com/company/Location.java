@@ -10,13 +10,13 @@ import java.util.Scanner;
 
 public class Location {
     //instance variables are private; can be accessed from inside class but not from other classes
-    private String description;
+    private String description; //The ascii art
     private String[] objects;
-    private Location[] exits;
+    private Location[] exits; //the 2 possibles next locations
     private String choice;
-    private String statement;
-    private boolean dead;
-    private boolean Final;
+    private String statement; //the statement
+    private boolean dead; //if is a dead location
+    private boolean Final; //if is a final location
 
     /**
      * Constructs a high school with an emergency exit and a desk chair.
@@ -27,7 +27,7 @@ public class Location {
     /**
      * Constructs a location with a given description, exit and chair.
      */
-    public Location(String description, String[] objects, Location[] exits, String choice,String statement) {
+    public Location(String description, String[] objects, Location[] exits, String choice,String statement) { //constructor
         this.description = description;
         this.exits = exits;
         this.objects = objects;
@@ -38,19 +38,36 @@ public class Location {
     /**
      * Displays the description of the location.
      */
-    public static void printLocation(Location location) {
+    public static void printLocation(Location location) { //we don't use this
         System.out.println("Description: " + location.description + ".\n Objects: " + Arrays.toString(location.objects) + ".\n Exits: " + Arrays.toString(location.exits));
     }
 
-    public static Location testLocation() {
+    public static Location testLocation() { //we don't use this
         Location location = new Location();
         printLocation(location);
         return location;
     }
 
+    /**
+    Method that gets next location with the current and the input of the user
+    */
+
+    public Location getChoice(Location location,String choice){
+
+        Location [] l= location.getExits(); //We get the 2 possible next locations
+        if(!choice.equals("A")&&!choice.equals("B")){ //Input error
+            return null;
+        }
+        if(choice.equals("A")){ //If is A we return the first
+
+            return l[0];
+        }else{ //if its B we return the second
+            return l[1];
+        }
+    }
 
     /**
-     * Gets the location's description.
+     * Get's and Set's methods
      */
     public String getDescription() {
         return this.description;
@@ -77,23 +94,8 @@ public class Location {
         return this.objects;
     }
 
-    public Location getChoice(Location location,String choice){
 
-       Location [] l= location.getExits();
-       if(!choice.equals("A")&&!choice.equals("B")){
-           return null;
-       }
-       if(choice.equals("A")){
 
-          return l[0];
-       }else{
-           return l[1];
-       }
-    }
-
-    /**
-     * Gets the location's exit.
-     */
     public Location[] getExits() {
         return this.exits;
     }
@@ -102,9 +104,6 @@ public class Location {
         return this.choice;
     }
 
-    /**
-     * Sets the description.
-     */
     public void setDescription(String description) {
         this.description = description;
     }
@@ -116,9 +115,6 @@ public class Location {
         this.objects = objects;
     }
 
-    /**
-     * Sets the exit.
-     */
     public void setExits(Location[] exits) {
         this.exits = exits;
     }
@@ -132,12 +128,9 @@ public class Location {
 
     /**
      * Creates a world that contains different locations
-     *
-     * @return Location[] world
      */
     public static Location createWorld() {
-        //create an array of Locations
-        Location[] world = new Location[10];
+
         Location location1 = new Location();
         Location location2 = new Location();
         Location location3 = new Location();
@@ -147,9 +140,9 @@ public class Location {
         Location location7 = new Location();
         Location location8 = new Location();
         Location location9 = new Location();
-        Location location10 = new Location(); //to do
-        Location location11= new Location(); //to do
-        Location location12= new Location(); //to do
+        Location location10 = new Location();
+        Location location11= new Location();
+        Location location12= new Location();
 
         Location die1 = new Location();
         Location die2 = new Location();
@@ -159,13 +152,17 @@ public class Location {
         Location die6 = new Location();
         Location die7 = new Location();
         Location die8 = new Location();
-        Location die9 = new Location(); //to do
-        Location die10 = new Location(); //to do
-        Location die11= new Location(); //to do
+        Location die9 = new Location();
+        Location die10 = new Location();
+        Location die11= new Location();
 
         Location final1=new Location();
-        Location final2=new Location(); //to do
-        Location final3=new Location(); //to do --> exit game
+        Location final2=new Location();
+        Location final3=new Location();
+        /**
+         *
+         * We create all the locations
+         */
 
 
         location1.setStatement("Press 'A' if you want to go down, press 'B' if you want to go to the right.");
@@ -613,7 +610,9 @@ public class Location {
     }
 }
 
-/*
+/**
+ *
+ * THE MAP WITH ALL THE LOCATIONS AND FINALS
                "┌─────────┬D──────┬─────────────┬─────┬─────┬───────────┐ \n" +
                "├─────┬─╴ ├─── 2╷ ╵ ┌───┬─────┐ │ ╷ ╶─┘ ╷3╷ │D┌─────┐6╷ │ \n" +
                "│ ╶───┤ ┌─┘1 ───┼───┘ ╷ └───╴ │ │D├───┬─┘ │ └─┤ ┌─╴ ╵ │ │ \n" +
