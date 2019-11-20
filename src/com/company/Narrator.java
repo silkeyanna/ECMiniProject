@@ -15,7 +15,8 @@ public class Narrator {
         name = in.nextLine(); //assigns entered string to the name variable
 
         //finally we print a greeting in the format of Hello {name}
-        System.out.println("Hello " + name + ". Welcome to your new adventure game! \n At the point of being you are lost in a labyrinth and trying to find your way out. You are represented by the X");
+        System.out.println("Hello " + name + ". Welcome to your new adventure game! " +
+                "\n At the point of being you are lost in a labyrinth and trying to find your way out. You are represented by the O");
 
 
         //create labyrinth at start of the story
